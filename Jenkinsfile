@@ -1,2 +1,5 @@
-// Build the plugin using https://github.com/jenkins-infra/pipeline-library
-buildPlugin()
+/*
+ See the documentation for more options:
+ https://github.com/jenkins-infra/pipeline-library/
+*/
+buildPlugin(useContainerAgent: true)
