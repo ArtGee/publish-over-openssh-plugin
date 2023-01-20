@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders/>
+  <publishers>
+    <io.jenkins.plugins.publish__over__openssh.BapSshPublisherPlugin>
+      <delegate>
+        <publishers>
+          <io.jenkins.plugins.publish__over__openssh.BapSshPublisher>
+            <configName>config a</configName>
+            <verbose>true</verbose>
+            <transfers>
+              <io.jenkins.plugins.publish__over__openssh.BapSshTransfer>
+                <remoteDirectory></remoteDirectory>
+                <sourceFiles></sourceFiles>
+                <removePrefix></removePrefix>
+                <remoteDirectorySDF>false</remoteDirectorySDF>
+                <flatten>false</flatten>
+                <execCommand>date</execCommand>
+                <execTimeout>120000</execTimeout>
+              </io.jenkins.plugins.publish__over__openssh.BapSshTransfer>
+              <io.jenkins.plugins.publish__over__openssh.BapSshTransfer>
+                <remoteDirectory>&apos;builds/&apos;yyyy_MM_dd/&apos;build-${BUILD_NUMBER}&apos;</remoteDirectory>
+                <sourceFiles>target/*.jar</sourceFiles>
+                <removePrefix>target</removePrefix>
+                <remoteDirectorySDF>true</remoteDirectorySDF>
+                <flatten>true</flatten>
+                <execCommand>ls -la /tmp</execCommand>
+                <execTimeout>15000</execTimeout>
+              </io.jenkins.plugins.publish__over__openssh.BapSshTransfer>
+            </transfers>
+          </io.jenkins.plugins.publish__over__openssh.BapSshPublisher>
+          <io.jenkins.plugins.publish__over__openssh.BapSshPublisher>
+            <configName>config c</configName>
+            <verbose>false</verbose>
+            <transfers>
+              <io.jenkins.plugins.publish__over__openssh.BapSshTransfer>
+                <remoteDirectory></remoteDirectory>
+                <sourceFiles>out\dist\**\*</sourceFiles>
+                <removePrefix>out\dist</removePrefix>
+                <remoteDirectorySDF>false</remoteDirectorySDF>
+                <flatten>false</flatten>
+                <execCommand></execCommand>
+                <execTimeout>10000</execTimeout>
+              </io.jenkins.plugins.publish__over__openssh.BapSshTransfer>
+            </transfers>
+          </io.jenkins.plugins.publish__over__openssh.BapSshPublisher>
+        </publishers>
+        <continueOnError>true</continueOnError>
+        <failOnError>true</failOnError>
+        <alwaysPublishFromMaster>true</alwaysPublishFromMaster>
+        <masterNodeName>essien</masterNodeName>
+        <hostConfigurationAccess class="io.jenkins.plugins.publish_over_openssh.BapSshPublisherPlugin" reference="../.."/>
+      </delegate>
+      <consolePrefix>SSH: </consolePrefix>
+    </io.jenkins.plugins.publish__over__openssh.BapSshPublisherPlugin>
+  </publishers>
+  <buildWrappers/>
+</project>
